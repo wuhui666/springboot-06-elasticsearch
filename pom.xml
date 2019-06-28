@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.21.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>zbh.springboot</groupId>
+    <artifactId>springboot-06-elasticsearch</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>springboot-06-elasticsearch</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <!--版本兼容问题：
+            Spring Data Elasticsearch	Elasticsearch
+                3.2.x                       6.7.2
+                3.1.x                       6.2.2
+                3.0.x                       5.5.0
+                2.1.x                       2.4.0
+                2.0.x                       2.2.0
+                1.3.x                       1.5.2
+           springboot2.0最低版本2.0.0的spring-boot-starter-data-elasticsearch
+           依赖Spring Data Elasticsearch 3.0.5，而Spring Data Elasticsearch 3.0.5
+           依赖elasticsearch5.6.8(网上说依赖5.5.0但我这里整死都会引入5.6.8,所以用不了boot2.0)，为了使用docker
+           docker（2019-6-28）镜像最高5.6.12<6.2.2，所以我改了springboot为1.5.21，通过starter引入了
+           Spring Data Elasticsearch 2.1.x,然后依赖自动引入elasticsearch 2.4.6，然后docker也安装的2.4.6，然后就没报错：
+           org.elasticsearch.client.transport.NoNodeAvailableException
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
